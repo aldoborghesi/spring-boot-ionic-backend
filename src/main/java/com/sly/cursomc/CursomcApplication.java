@@ -2,6 +2,7 @@
 
 import java.util.Arrays;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,10 +10,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.sly.cursomc.domain.Categoria;
 import com.sly.cursomc.domain.Cidade;
+import com.sly.cursomc.domain.Cliente;
+import com.sly.cursomc.domain.Endereco;
 import com.sly.cursomc.domain.Estado;
 import com.sly.cursomc.domain.Produto;
+import com.sly.cursomc.domain.enums.TipoCliente;
 import com.sly.cursomc.respositories.CategoriaRepository;
 import com.sly.cursomc.respositories.CidadeRepository;
+import com.sly.cursomc.respositories.ClienteRepository;
+import com.sly.cursomc.respositories.EnderecoRepository;
 import com.sly.cursomc.respositories.EstadoRepository;
 import com.sly.cursomc.respositories.ProdutoRepository;
 
@@ -30,6 +36,12 @@ public class CursomcApplication implements CommandLineRunner {
 	
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -68,6 +80,18 @@ public class CursomcApplication implements CommandLineRunner {
 		
 		estadoRepository.saveAll(Arrays.asList(est1,est2));
 		cidadeRepository.saveAll(Arrays.asList(c1,c2,c3));
+		
+		Cliente cli1 = new Cliente(null, "Salomão", "salomo@acom.com", "12322456788", TipoCliente.PESSOAFISICA);
+		
+		cli1.getTelefones().addAll(Arrays.asList("4444411","33213333"));
+		
+		Endereco end1 = new Endereco(null, "Rua Maceio", "100", "Fundos", "centro", "68000-000", cli1, c1);
+		Endereco end2 = new Endereco(null, "Rua Netuno", "222", "", "Comerci", "77000-000", cli1, c2);
+
+		cli1.getEnderecos().addAll(Arrays.asList(end1,end2));
+	
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(end1,end2));
 		
 	}
 
