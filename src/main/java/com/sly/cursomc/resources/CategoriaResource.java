@@ -49,6 +49,14 @@ public class CategoriaResource {
 		// HTTP 204 - Success no content
 		return ResponseEntity.noContent().build();
 	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@RequestBody Categoria obj, @PathVariable Integer id ) {
+        service.delete(id);
+		// HTTP 204 - Success no content
+		return ResponseEntity.noContent().build();
+	}
+	
 	/*
 	public List<Categoria> listar() {
 		
