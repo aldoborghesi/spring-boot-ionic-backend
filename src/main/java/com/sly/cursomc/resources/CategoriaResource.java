@@ -30,7 +30,7 @@ public class CategoriaResource {
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Categoria obj = service.buscar(id);
+		Categoria obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
@@ -41,6 +41,13 @@ public class CategoriaResource {
 		// O HTTP Exige uma resposta 201 e uma URI
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+	}
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id ) {
+		obj.setId(id);
+		obj = service.update(obj);
+		// HTTP 204 - Success no content
+		return ResponseEntity.noContent().build();
 	}
 	/*
 	public List<Categoria> listar() {
