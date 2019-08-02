@@ -2,6 +2,10 @@ package com.sly.cursomc.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.sly.cursomc.domain.Categoria;
 
 public class CategoriaDTO implements Serializable {
@@ -10,6 +14,8 @@ public class CategoriaDTO implements Serializable {
 	
 	// Data Trasnfer Objeto, customizar o retorno dos objetos
 	private Integer id;
+	@NotBlank(message="Nome Obrigatorio")
+	@Length(min = 5, max = 80, message = "Tamanho deve ser entre 5 e 80 caracteres")
 	private String nome;
 	
 	public CategoriaDTO() {
