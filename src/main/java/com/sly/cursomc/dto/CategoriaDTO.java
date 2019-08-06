@@ -14,6 +14,7 @@ public class CategoriaDTO implements Serializable {
 	
 	// Data Trasnfer Objeto, customizar o retorno dos objetos
 	private Integer id;
+	
 	@NotBlank(message="Nome Obrigatorio")
 	@Length(min = 5, max = 80, message = "Tamanho deve ser entre 5 e 80 caracteres")
 	private String nome;
