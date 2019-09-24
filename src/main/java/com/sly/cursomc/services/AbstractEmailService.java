@@ -9,7 +9,7 @@ import com.sly.cursomc.domain.Pedido;
 // Template Method
 public abstract class AbstractEmailService implements EmailService {
 
-	@Value("$(default.sender)")
+	@Value("${default.sender}")	
 	private String sender;
 	
 	@Override
